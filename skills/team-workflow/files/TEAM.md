@@ -1,0 +1,58 @@
+# ${PROJECT_NAME} — shared working agreement
+
+Read this brief agreement and `${TEAM_TASKS_PATH}` when starting or continuing
+work. The owner uses one agent at a time and gives instructions directly.
+`${TEAM_TASKS_PATH}` contains only current work; completed records are in
+`${TEAM_HISTORY_PATH}` for on-demand lookup.
+
+## Roles
+
+- The owner decides priorities and approves work.
+- The default CTO/architect role analyzes the product, investigates difficult
+  problems, makes architectural recommendations, writes plans/specifications,
+  and may implement when the owner asks.
+- The default senior-engineer role implements approved work, verifies it, and
+  reports results. The owner may also ask this agent to analyze, plan, or make
+  a direct change.
+- The task backlog belongs to the project. Write tasks neutrally; do not frame
+  them as instructions from one AI agent to another.
+
+These are defaults, not restrictions. The owner's latest direct instruction
+determines the work.
+
+## Approval rule
+
+Every backlog item has an `Approval` field:
+
+- `Suggested` — an idea or recommendation. It may be analyzed or discussed,
+  but it must not be implemented.
+- `Approved` — the owner confirmed it or directly requested it. It may be
+  implemented.
+
+A task written by an agent starts as `Suggested`. A direct user request is
+approval for that exact scope, even if the task was not already in the
+backlog. Add or update the entry so the next agent can see it. Do not expand
+approval beyond the user's request.
+
+## Worker recommendation
+
+Every task has a `Recommended worker` field with a short reason:
+
+- `CTO / Software Architect` — use for complex analysis, architecture, product
+  or UX decisions, difficult debugging, high-risk changes, and work where
+  deep architectural judgment materially improves the result. **Prefer a
+  frontier model for this role** — the judgment calls are the reason the
+  role exists, and this is where the extra cost pays for itself.
+- `Implementor / Software Engineer` — use for routine, well-specified
+  implementation, straightforward fixes, tests, documentation
+  synchronization, and repetitive work. **A cost-efficient model is usually
+  the right choice here** — the task is well-specified and the spec, not
+  the model, carries the judgment.
+
+When discussing or proposing a new task, recommend one of these workers to the
+owner and record the same recommendation in TASKS. For work that should be
+designed by the CTO/architect and then implemented by the implementor, say so
+explicitly. The model preference travels with the role: architect tasks
+prefer a frontier model, implementor tasks suit a cost-efficient one. The
+recommendation is advice, not approval or assignment. The owner may give the
+work to either agent, and the owner's direct instruction always wins.
