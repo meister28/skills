@@ -1,7 +1,7 @@
 # team/specs/ — specifications and design documents
 
 Implementation-ready specs live here, named `P-NNN-<NAME>-SPEC.md` for the
-backlog item they specify (e.g. `P-033-VISUAL-UX-SPEC.md`). A task with a
+backlog item they specify (e.g. `P-007-SEARCH-SPEC.md` for the P-007 task). A task with a
 spec references it from its `team/TASKS.md` record by path.
 
 What belongs here: a spec written **before** implementation that another

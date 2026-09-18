@@ -152,6 +152,6 @@ a reason to lose the record. Each entry carries the candidate's problem,
 change, and acceptance criteria from the report, cites the source review
 path under Approval, states the badge strength in Status, and records a
 Recommended worker per rule 1. Deferral or sequencing constraints (e.g.
-"after P-031's verdict") go in the Status line so no agent picks the task
+"after P-00X's verdict") go in the Status line so no agent picks the task
 up out of order. Registration is not approval: candidates enter as
 Suggested and the owner approves implementation.

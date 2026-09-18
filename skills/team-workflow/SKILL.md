@@ -7,12 +7,12 @@ disable-model-invocation: true
 # Team workflow — instantiate or upgrade the multi-agent working agreement
 
 One canonical workflow, instantiated per project. The template files in
-`files/` next to this SKILL.md are **generalized** from a production setup
-(the Morning Todo repo, September 2026): role definitions and the approval
-rule from `TEAM.md`, eight binding agent rules from `AGENTS.md` (rule 5,
-the persistence rule, is the one deliberately excluded — it is
-project-specific), the task-queue conventions from `team/WORKFLOW.md`, and
-skeletons for the queue, archive, glossary, and changelog.
+`files/` next to this SKILL.md are **generalized** from a battle-tested
+production setup: role definitions and the approval rule for `TEAM.md`,
+eight binding agent rules for `AGENTS.md` (the rule-5 slot is deliberately
+left empty — it must be derived from the target codebase), the task-queue
+conventions for `team/WORKFLOW.md`, and skeletons for the queue, archive,
+glossary, and changelog.
 
 The workflow's value is coordination between agents: a `team/TASKS.md`
 queue with approval states, specs as the inter-agent communication channel,
