@@ -1,98 +1,106 @@
 # skills
 
-A collection of [Agent Skills](https://agentskills.io) for AI coding agents.
-Skills live in `skills/<skill-name>/`, each with a `SKILL.md` and whatever
-supporting files it needs. Shape inspired by
-[mattpocock/skills](https://github.com/mattpocock/skills).
+Agent Skills for AI coding agents. Each skill lives in `skills/<skill-name>/` with a `SKILL.md` and any supporting files it needs. Compatible with any agent that reads the [Agent Skills](https://agentskills.io) format, including Claude Code, Codex, and Cursor. Shape inspired by [mattpocock/skills](https://github.com/mattpocock/skills).
 
-## Why this exists
-
-A day of AI-assisted development, and probably yesterday too:
-
-You're deep in a feature with your favorite frontier model. The context is
-loaded, the plan is set — and then you hit your usage limit. So you switch
-to a cheaper agent to keep the implementation moving. Later your quota
-resets, you switch back to the frontier agent — and it discovers three
-things that need doing. Two are routine, so you hand them to the cheap
-agent as well. Then your usage runs low again, and you swap once more.
-
-That rhythm — the expensive model for thinking, the cheap one for typing —
-is the most efficient way to work with AI. It is also how projects fall
-apart, because **every switch is a fresh start.** The next agent knows
-nothing about what was decided, what was tried, what is approved, or what
-the rules are. So you re-explain the project from scratch; the agent
-re-litigates settled decisions, implements something you never asked for,
-or "fixes" what was already fixed. Multiply by every switch in a day and
-the mess compounds: two agents, two different versions of what the project
-even is.
-
-`team-workflow` fixes this by moving the project's memory out of chat
-scrollback and into the repo, where every agent reads the same files:
+---
 
 ## The skill: [team-workflow](skills/team-workflow/)
 
-One command sets up a working agreement that any AI agent — Claude Code,
-Codex, Cursor, or whatever ships next month — reads before it touches
-code:
+**Every AI agent on your project shares the same memory, the same rules, and the same task queue. All of it lives in the repo, not in chat.**
 
-- **A task queue that outlives the chat.** `team/TASKS.md` holds the
-  backlog with approval states (`Suggested` ideas may not be implemented;
-  `Approved` ones may), required acceptance criteria, and a recommended
-  worker per task. An agent starting cold reads one file and knows
-  exactly what's sanctioned, what's done, and why.
-- **The right model on the right job.** Every task names its worker:
-  *CTO/Software Architect* work (architecture, gnarly debugging,
-  high-risk changes) prefers a frontier model; *Implementor/Software
-  Engineer* work (well-specified builds, tests, docs sync) suits a
-  cost-efficient one. Most coding tasks don't need the expensive brain —
-  the workflow makes that routing the default instead of an afterthought.
-- **Specs as the inter-agent contract.** Implementation-ready specs live
-  in `team/specs/` — written before code, referenced by the task, kept
-  truthful in the same commit. Agents stop pasting intent into chat and
-  start handing each other documents.
-- **Documentation that can't drift.** The binding rules require the
-  changelog entry in the same commit as the change, and the spec update in
-  the same commit as the behavior. Six months later the docs still tell
-  the truth — which is what makes the next agent's first five minutes
-  cheap instead of forensic.
-- **Trust rails, not bureaucracy.** UI changes are approval-gated. Audits
-  and architecture reviews land in `team/audit/` and `team/reviews/`.
-  Review candidates automatically become queue entries, so good ideas
-  stop evaporating between sessions.
-- **Self-upgrading.** Projects scaffolded by the skill carry a
-  "canonical template" pointer: improve the workflow while working in any
-  project, back-port it to the skill, push. Every future project inherits
-  the improvement instead of forking the convention per repo.
+**Work seamlessly with different AI agents on one project.**
 
-## Install
+**One command sets up a working agreement that any AI agent — Claude Code, Codex, Cursor, or whatever ships next month — reads before it touches code.**
 
-Copy a skill into your agent's skills directory — commonly
-`~/.claude/skills/` or `~/.agents/skills/` (this collection is developed
-against the latter; use whatever your agent reads):
+**Save tokens and still get top-tier code and architecture: the expensive model only works where it matters.**
+
+**Your AI agents work like a real engineering team, coordinating with each other.**
+
+Switch models mid-feature, run two agents in parallel, or come back after a week: the next agent starts from the project's written record instead of a guess.
+
+### The problem
+
+The most cost-effective way to work with AI is to use a frontier model for thinking and a cheaper one for implementation. In practice that setup breaks down, because **every switch is a cold start.** The new agent doesn't know what was decided, what was tried, what is approved, or what the rules are. So you re-explain the project, and the agent re-opens settled decisions, builds something nobody asked for, or "fixes" what was already fixed.
+
+Chat history is the wrong place for project memory. `team-workflow` moves it into files that every agent reads before touching code.
+
+### How the workflow runs
+
+```
+Suggested ──▶ Approved ──▶ Built ──▶ Reviewed ──▶ team/TASK-HISTORY.md
+    ▲                                    │
+    └── review candidates become ────────┘
+        new queue entries
+```
+
+1. **Plan.** A frontier agent (in the *CTO / Software Architect* role) writes an implementation-ready spec in `team/specs/` and adds a task to `team/TASKS.md` with acceptance criteria and a recommended worker. The task starts as `Suggested`.
+2. **Approve.** You review and mark it `Approved`. `Suggested` items may not be implemented; `Approved` ones may.
+3. **Build.** A cost-efficient agent (in the *Implementor / Software Engineer* role) picks up the task in a fresh session. It needs no briefing: the task, the spec, and the project rules are all in the repo. The spec and changelog are updated in the same commit as the code.
+4. **Review.** Audits and architecture reviews are written to `team/audit/` and `team/reviews/`. Anything worth acting on becomes a new queue entry instead of disappearing when the session ends.
+5. **Record.** Finished work moves to `team/TASK-HISTORY.md` with who did it and when.
+
+Any agent, at any point, can read the queue and know what is sanctioned, what is done, and why.
+
+### What changes in practice
+
+| Without a shared workflow | With `team-workflow` |
+|---|---|
+| Switching agents means re-explaining the project | The new agent reads the repo and continues |
+| "Is this approved?" is answered from memory of a chat | Approval state is recorded per task (`Suggested` / `Approved`) |
+| Whichever model is open does whatever is asked | Each task names its worker: frontier for architecture and hard debugging, cost-efficient for well-specified builds, tests, and docs |
+| Intent is pasted between chats | Specs in `team/specs/` are the hand-off between agents |
+| Docs go stale within weeks | Changelog and spec are updated in the same commit as the change |
+| Good ideas from reviews are lost between sessions | Review candidates become queue entries automatically |
+| Each repo drifts into its own conventions | Improvements are back-ported to the skill, and every future project inherits them |
+
+### What you get
+
+- **Continuity across agents and sessions.** The task queue, specs, and history persist in the repo. No agent depends on what another agent remembers.
+- **Lower cost per feature.** Most coding tasks don't need the most expensive model. Because every task names its recommended worker, routing work to the right tier is the default rather than an afterthought.
+- **Control without overhead.** Nothing gets built unless it is approved, and UI changes are approval-gated. The rails are light: you decide what gets built, and agents handle the rest.
+- **Documentation that stays true.** The binding rules require spec and changelog updates in the same commit as the behavior change. Six months later the docs still match the code, and the next agent's first five minutes are cheap.
+- **A workflow that improves over time.** Scaffolded projects carry a pointer to the canonical template. Improve the workflow while working in any project, back-port it to the skill, and every future project benefits.
+
+### What gets scaffolded
+
+```
+TEAM.md                 working agreement and binding rules for every agent
+AGENTS.md               entry point for agents
+CONTEXT.md              project context
+CHANGELOG.md            updated in the same commit as each change
+team/
+├── TASKS.md            the queue: approval state, acceptance criteria, recommended worker
+├── TASK-HISTORY.md     finished work, with who and when
+├── specs/              implementation-ready specs, written before code
+├── audit/              audit findings
+└── reviews/            architecture and code reviews
+```
+
+### Install
+
+Copy the skill into your agent's skills directory, commonly `~/.claude/skills/` or `~/.agents/skills/`. Use whichever your agent reads.
 
 ```bash
 git clone https://github.com/meister28/skills.git
 cp -r skills/skills/team-workflow ~/.claude/skills/
 ```
 
-Or symlink so updates propagate: clone the repo anywhere and
-`ln -s /path/to/skills/skills/team-workflow ~/.claude/skills/team-workflow`.
+To pick up updates automatically, symlink instead:
 
-## Use
+```bash
+ln -s /path/to/skills/skills/team-workflow ~/.claude/skills/team-workflow
+```
 
-Inside a project, invoke the skill (e.g. `/team-workflow`):
+### Use
 
-- **Fresh project?** It detects your stack, fills the project-specific
-  slots (verification commands, the project's single-door rule), and
-  scaffolds `TEAM.md`, `AGENTS.md`, `CONTEXT.md`, `CHANGELOG.md`, and the
-  whole `team/` tree.
-- **Existing repo?** It diffs against what's already there and proposes
-  per-file adopt/keep/merge decisions — it never overwrites without your
-  explicit per-file confirmation.
+Inside your project, invoke the skill (for example `/team-workflow`).
 
-Then work the way the files prescribe: tasks get approved before they get
-built, finished work moves to `team/TASK-HISTORY.md` with who/when, and
-the next agent — human or AI — starts from a record instead of a guess.
+- **New project.** It detects your stack, fills in the project-specific settings (verification commands and the project's single-door rule), and scaffolds the files above.
+- **Existing repo.** It compares against what is already there and proposes an adopt / keep / merge decision for each file. It never overwrites anything without your explicit per-file confirmation.
+
+From then on, work the way the files prescribe: get tasks approved before they are built, and let finished work flow into `team/TASK-HISTORY.md`.
+
+---
 
 ## License
 
