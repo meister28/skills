@@ -7,22 +7,27 @@ supporting files it needs. Shape inspired by
 
 ## Why this exists
 
-Multi-agent coding has a dirty secret: **the agents aren't the bottleneck —
-the coordination is.**
+A day of AI-assisted development, and probably yesterday too:
 
-If you run more than one AI agent on the same codebase, you know the
-failure modes. Agent B re-litigates a decision Agent A already made —
-because nothing records it. A "small fix" ships with an unrequested UI
-redesign — because nobody wrote down that UI is approval-gated. A bug gets
-"fixed" twice and breaks a third time — because the fix lived in a chat
-scrollback, not in a file. Handoffs between agents turn into a fresh
-onboarding every time, burning tokens re-discovering what was already
-known. And every task routes to your most expensive model by default,
-because there's no convention for when a cheaper one will do just fine.
+You're deep in a feature with your favorite frontier model. The context is
+loaded, the plan is set — and then you hit your usage limit. So you switch
+to a cheaper agent to keep the implementation moving. Later your quota
+resets, you switch back to the frontier agent — and it discovers three
+things that need doing. Two are routine, so you hand them to the cheap
+agent as well. Then your usage runs low again, and you swap once more.
 
-**`team-workflow`** fixes this the boring way: a set of plain markdown
-files that live *in your repo* and turn a pile of agents into a team with
-a memory.
+That rhythm — the expensive model for thinking, the cheap one for typing —
+is the most efficient way to work with AI. It is also how projects fall
+apart, because **every switch is a fresh start.** The next agent knows
+nothing about what was decided, what was tried, what is approved, or what
+the rules are. So you re-explain the project from scratch; the agent
+re-litigates settled decisions, implements something you never asked for,
+or "fixes" what was already fixed. Multiply by every switch in a day and
+the mess compounds: two agents, two different versions of what the project
+even is.
+
+`team-workflow` fixes this by moving the project's memory out of chat
+scrollback and into the repo, where every agent reads the same files:
 
 ## The skill: [team-workflow](skills/team-workflow/)
 
