@@ -42,11 +42,11 @@ reads):
 
 ```bash
 # clone the whole collection
-git clone https://github.com/rachidis/skills.git
+git clone https://github.com/meister28/skills.git
 cp -r skills/skills/team-workflow ~/.claude/skills/
 
 # or, without cloning, just the one skill (sparse checkout)
-git clone --depth 1 --filter=blob:none --sparse https://github.com/rachidis/skills.git
+git clone --depth 1 --filter=blob:none --sparse https://github.com/meister28/skills.git
 cd skills && git sparse-checkout set skills/team-workflow
 cp -r skills/team-workflow ~/.claude/skills/
 ```
