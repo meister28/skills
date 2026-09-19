@@ -56,3 +56,24 @@ explicitly. The model preference travels with the role: architect tasks
 prefer a frontier model, implementor tasks suit a cost-efficient one. The
 recommendation is advice, not approval or assignment. The owner may give the
 work to either agent, and the owner's direct instruction always wins.
+
+## Working discipline
+
+**Stop and re-plan immediately when something goes sideways.** If
+verification fails twice on the same approach, the fix feels hacky, or the
+change is growing beyond its approved scope — STOP. Re-diagnose (or hand the
+evidence to the other role) before pushing on; grinding through a broken
+approach costs more than the re-plan. Record the pivot in the task's
+progress notes so the next agent doesn't repeat the dead end.
+
+**The implementor's elegance checkpoint:** before reporting done, ask
+"knowing everything I know now, is this the elegant solution?" If the fix
+feels hacky, pause and say so — propose the cleaner shape to the owner or
+architect instead of shipping a hack under a green test suite. Skip this for
+simple, obvious fixes; don't over-engineer. A recurring hackiness pattern
+also becomes a line in `team/LESSONS.md`.
+
+**Self-improvement loop:** after any correction from the owner, a review,
+or a failed verification, write the pattern and its one-line prevention rule
+into `team/LESSONS.md` in the same session, and read that file at session
+start. Lessons that recur graduate into numbered AGENTS.md rules.

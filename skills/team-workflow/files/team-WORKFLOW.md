@@ -18,6 +18,11 @@ This file is the quick reference agents and the owner consult day to day.
   `P-NNN-<NAME>-SPEC.md`; tasks reference them by path.
 - **Audits:** triggered audits are stored as markdown in `team/audit/`
   (see AGENTS.md rule 7).
+- **Lessons:** corrections become one-line prevention rules in
+  `team/LESSONS.md`, written in the same session as the correction and read
+  at session start; recurring lessons graduate into AGENTS.md rules.
+- **Stop and re-plan:** when verification fails twice on the same approach or
+  the fix feels hacky, stop and re-diagnose before pushing on (see TEAM.md).
 - **Architecture reviews:** the visual HTML reports produced by the
   architecture-review pass are stored in `team/reviews/`; the temp file is
   ephemeral and the durable copy lands here. **Every candidate becomes a

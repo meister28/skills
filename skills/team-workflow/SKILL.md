@@ -58,8 +58,8 @@ Start by inspecting the target project root:
 3. **Create the files** (never overwrite — if a target exists, that file
    goes through the Mode B decision even inside an init):
    - Root: `TEAM.md`, `AGENTS.md`, `CONTEXT.md`, `CHANGELOG.md`
-   - `team/`: `TASKS.md`, `TASK-HISTORY.md`, `WORKFLOW.md`, `specs/README.md`,
-     `audit/README.md`, `reviews/README.md`
+   - `team/`: `TASKS.md`, `TASK-HISTORY.md`, `WORKFLOW.md`, `LESSONS.md`,
+     `specs/README.md`, `audit/README.md`, `reviews/README.md`
    - Where they live depends on repo layout: monorepo with one app → put
      workflow docs at the app root (as this repo does) or repo root, then
      **record the choice in TEAM.md** so agents look in the right place.
@@ -92,6 +92,9 @@ Start by inspecting the target project root:
 - `files/AGENTS.md` — the binding rules (generalized; project slots marked)
 - `files/team-WORKFLOW.md` — the one-page quick reference
 - `files/team-TASKS.md`, `files/team-TASK-HISTORY.md` — queue + archive skeletons
+- `files/team-LESSONS.md` — the lessons ledger (self-improvement loop:
+  corrections become one-line prevention rules; recurring ones graduate into
+  AGENTS.md rules)
 - `files/CONTEXT.md`, `files/CHANGELOG.md` — glossary and changelog stubs
 - `files/team-specs-README.md`, `files/team-audit-README.md`,
   `files/team-reviews-README.md` — folder READMEs explaining each folder's

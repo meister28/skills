@@ -10,6 +10,10 @@ this repository.
 
 ## 0. Read the working agreement and the backlog first
 
+<!-- SLOT: team-folder contents. The template scaffolds team/LESSONS.md (the
+     lessons ledger: corrections become one-line prevention rules, read at
+     session start); keep a pointer to it in this section when adopting. -->
+
 [`/TEAM.md`](./TEAM.md) holds the roles (the owner decides; the architect
 analyzes and recommends; the senior engineer implements and verifies) and the
 approval rule: **a backlog item marked `Suggested` must not be implemented**,

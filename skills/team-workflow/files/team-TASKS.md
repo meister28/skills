@@ -39,3 +39,10 @@ Adding or finishing a task: place new entries **within their category by
 recommended order**, not at the end by ID. Required fields: Approval, Status,
 Recommended worker (with reason), acceptance criteria. A task missing any
 field is incomplete.
+
+Audits and reviews always end in the same session with (a) their findings
+file under `audit/` or `reviews/` and (b) a Suggested entry here for every
+recommendation that should become work, citing that file's path under
+Approval. If an owner declines a review candidate for a load-bearing,
+durable reason, record it as an ADR (e.g. `docs/adr/`) so future review
+passes stop re-suggesting it.
