@@ -41,6 +41,41 @@ Suggested ──▶ Approved ──▶ Built ──▶ Reviewed ──▶ team/T
 
 Any agent, at any point, can read the queue and know what is sanctioned, what is done, and why — and the team stops paying for the same mistake twice.
 
+### A task's life, in four file snapshots
+
+**1. The architect proposes** — a new entry lands in `team/TASKS.md`, `Suggested`, with a worker recommendation:
+
+```markdown
+### P-007 — CSV export for the orders table
+- Approval: Suggested — proposed by the architect, 2026-09-19.
+- Recommended worker: Implementor / Software Engineer (cost-efficient model) —
+  well-specified build; the spec carries the decisions.
+- Spec: team/specs/P-007-CSV-EXPORT-SPEC.md
+- Acceptance: exports match the current filter; 10k rows in < 2s; unit-tested.
+```
+
+**2. You approve** — one word changes, and the task becomes buildable. The implementor picks it up in a fresh session with no briefing beyond "work the queue."
+
+**3. The implementor ships** — code, spec, and changelog in one commit, each task provable:
+
+```markdown
+### Changed
+- Orders can be exported to CSV. Exports respect the active filter and stream
+  in under two seconds for ten thousand rows. (P-007)
+```
+
+**4. The queue stays clean** — the full record moves to `team/TASK-HISTORY.md`:
+
+```markdown
+### P-007 — CSV export for the orders table — Completed
+- Result: shipped as specified; acceptance all green (42 unit tests, export < 2s).
+- Completed by: Implementor (cost-efficient model), 2026-09-19 16:40 +02:00.
+- Remaining uncertainty: quoting edge cases for embedded newlines — covered, but
+  watch for downstream tools that disagree about RFC 4180.
+```
+
+Nothing above lives in a chat. If the next agent asks "is CSV export done?", "who decided the streaming approach?", or "did anyone worry about newline quoting?" — the answers are in the repo.
+
 ### What changes in practice
 
 | Without a shared workflow | With `team-workflow` |
