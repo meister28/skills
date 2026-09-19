@@ -35,11 +35,11 @@ Suggested ──▶ Approved ──▶ Built ──▶ Reviewed ──▶ team/T
 
 1. **Plan.** A frontier agent (in the *CTO / Software Architect* role) writes an implementation-ready spec in `team/specs/` and adds a task to `team/TASKS.md` with acceptance criteria and a recommended worker. The task starts as `Suggested`.
 2. **Approve.** You review and mark it `Approved`. `Suggested` items may not be implemented; `Approved` ones may.
-3. **Build.** A cost-efficient agent (in the *Implementor / Software Engineer* role) picks up the task in a fresh session. It needs no briefing: the task, the spec, and the project rules are all in the repo. The spec and changelog are updated in the same commit as the code.
-4. **Review.** Audits and architecture reviews are written to `team/audit/` and `team/reviews/`. Anything worth acting on becomes a new queue entry instead of disappearing when the session ends.
-5. **Record.** Finished work moves to `team/TASK-HISTORY.md` with who did it and when.
+3. **Build.** A cost-efficient agent (in the *Implementor / Software Engineer* role) picks up the task in a fresh session. It needs no briefing: the task, the spec, and the project rules are all in the repo. The spec and changelog are updated in the same commit as the code. And the cheap model isn't on its own: when verification fails twice on the same approach, it stops and re-plans instead of grinding on; before reporting done it asks "knowing everything I know now, is this the elegant solution?" — and flags hacks instead of shipping them under a green test suite.
+4. **Review.** Audits and architecture reviews are written to `team/audit/` and `team/reviews/`. Anything worth acting on becomes a new queue entry instead of disappearing when the session ends. Corrections — from you, a review, or a failed verification — become one-line prevention rules in `team/LESSONS.md` that every agent reads at session start.
+5. **Record.** Finished work moves to `team/TASK-HISTORY.md` with who did it and when. Lessons that keep recurring graduate from the ledger into numbered binding rules.
 
-Any agent, at any point, can read the queue and know what is sanctioned, what is done, and why.
+Any agent, at any point, can read the queue and know what is sanctioned, what is done, and why — and the team stops paying for the same mistake twice.
 
 ### What changes in practice
 
@@ -51,6 +51,8 @@ Any agent, at any point, can read the queue and know what is sanctioned, what is
 | Intent is pasted between chats | Specs in `team/specs/` are the hand-off between agents |
 | Docs go stale within weeks | Changelog and spec are updated in the same commit as the change |
 | Good ideas from reviews are lost between sessions | Review candidates become queue entries automatically |
+| The same mistake repeats with every new agent | Corrections become one-line rules in `team/LESSONS.md`, read at every session start |
+| A cheap model ships a hack and you find out later | The workflow makes it stop and re-plan on repeated failures and flag inelegant fixes before done |
 | Each repo drifts into its own conventions | Improvements are back-ported to the skill, and every future project inherits them |
 
 ### What you get
@@ -60,6 +62,7 @@ Any agent, at any point, can read the queue and know what is sanctioned, what is
 - **Control without overhead.** Nothing gets built unless it is approved, and UI changes are approval-gated. The rails are light: you decide what gets built, and agents handle the rest.
 - **Documentation that stays true.** The binding rules require spec and changelog updates in the same commit as the behavior change. Six months later the docs still match the code, and the next agent's first five minutes are cheap.
 - **A workflow that improves over time.** Scaffolded projects carry a pointer to the canonical template. Improve the workflow while working in any project, back-port it to the skill, and every future project benefits.
+- **A team that learns from its mistakes.** Every correction becomes a one-line prevention rule in `team/LESSONS.md`, written while the cause is fresh and read at the next session start. Recurring lessons graduate into binding rules — the workflow compounds in the direction of fewer repeated errors.
 
 ### What gets scaffolded
 
@@ -71,6 +74,7 @@ CHANGELOG.md            updated in the same commit as each change
 team/
 ├── TASKS.md            the queue: approval state, acceptance criteria, recommended worker
 ├── TASK-HISTORY.md     finished work, with who and when
+├── LESSONS.md          corrections become prevention rules, read at session start
 ├── specs/              implementation-ready specs, written before code
 ├── audit/              audit findings
 └── reviews/            architecture and code reviews
