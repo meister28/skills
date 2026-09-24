@@ -1,6 +1,6 @@
 ---
 name: team-workflow
-description: Set up or adapt a shared, repository-based workflow for people and coding agents: approval, task handoff, specs, lessons, and change records.
+description: "Set up or adapt a shared, repository-based workflow for people and coding agents: approval, task handoff, specs, lessons, and change records."
 disable-model-invocation: true
 ---
 
