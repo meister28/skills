@@ -1,48 +1,42 @@
-# ${PROJECT_NAME} — task queue
+# Active task queue
 
-The active backlog and handoff. One entry per task, next unused `P-NNN` id.
-Entries are grouped into categories and placed within each category by
-**recommended implementation order**, not by ID. Completed records move to
-[`TASK-HISTORY.md`](./TASK-HISTORY.md) — read it only when investigating a
-past task, its decision, or its verification.
+Read [TEAM.md](../TEAM.md) for approval and handoff rules. Completed work
+belongs in [TASK-HISTORY.md](./TASK-HISTORY.md). Use a unique task ID chosen
+by this project; order entries by recommended implementation priority.
+
+Each entry records Trigger, Approval, Recommended worker with a reason,
+Summary, Acceptance, Created, and Status. A direct owner request is an
+approval for its exact scope. An agent proposal starts Suggested.
 
 ## Current work
 
-### P-001 — <task title> *(Category tag)*
+No current task.
 
-- Approval: **Owner request, YYYY-MM-DD** — <the owner's words, or the
-  review/decision that produced it>.
-- Recommended worker: **<CTO / Software Architect | Implementor / Software Engineer>** —
-  <one-line reason; architect tasks prefer a frontier model, implementor
-  tasks a cost-efficient one (TEAM.md)>.
-- Status: **In progress** — <the exact next step, kept accurate, so any
-  agent can resume cold>.
-- <Problem / contract / acceptance criteria — what done means, measurably.>
+## Ready
 
-## Ready — approved, in recommended implementation order
+No approved queued task.
 
-*(empty — approved tasks land here in the order they should be implemented)*
+## Suggested
 
-## Suggested — awaiting owner approval, in recommended order
-
-*(empty — agent-proposed tasks enter here; rule: Suggested must not be
-implemented until the owner approves)*
+No proposals awaiting approval.
 
 ## Deferred
 
-*(empty — parked tasks with the blocking constraint stated in the Status
-line, e.g. "after P-00X lands", so nobody picks them up out of order)*
+No deferred task.
 
----
+## Task entry format
 
-Adding or finishing a task: place new entries **within their category by
-recommended order**, not at the end by ID. Required fields: Approval, Status,
-Recommended worker (with reason), acceptance criteria. A task missing any
-field is incomplete.
+Copy this shape into the appropriate section and fill every field:
 
-Audits and reviews always end in the same session with (a) their findings
-file under `audit/` or `reviews/` and (b) a Suggested entry here for every
-recommendation that should become work, citing that file's path under
-Approval. If an owner declines a review candidate for a load-bearing,
-durable reason, record it as an ADR (e.g. `docs/adr/`) so future review
-passes stop re-suggesting it.
+```markdown
+### <ID> - <task title>
+
+**Trigger:** <request or finding>
+**Approval:** <owner approval, or Suggested with source>
+**Recommended worker:** <role and reason>
+**Summary:** <what will change and why>
+**Acceptance:** <observable completion criteria>
+**Created:** <YYYY-MM-DD>
+**Status:** <Current, Ready, Suggested, or Deferred; include next step or blocker>
+**Spec:** <relative path if a spec exists>
+```

@@ -1,10 +1,7 @@
-# Changelog — ${PROJECT_NAME}
+# Changelog
 
-Every change that lands in the repo appends an entry here in the same commit
-(AGENTS.md rule 1): features, behavior changes, refactors, doc corrections,
-bug fixes — especially bug fixes. One bullet per user-visible change, newest
-date section first, subsections `### Added` / `### Changed` / `### Fixed`.
-Never rewrite or delete existing entries.
+Record every landed change in the same commit as the change. Use dated
+sections with Added, Changed, or Fixed entries that describe the effect
+for a user or maintainer. Keep older entries as historical evidence.
 
-<!-- Intro above is the permanent record of the convention; the first date
-     section appears with the first change. -->
+No changes recorded yet.

@@ -1,25 +1,16 @@
-# Lessons — corrections become rules
+# Lessons
 
-Every correction from the owner, a review, or a failed verification becomes
-one line here: the pattern, and the rule that prevents a repeat. Write the
-lesson **in the same session as the correction**, while the cause is fresh —
-a lesson recorded later is a lesson half-remembered.
+Record a correction from the owner, a review, or failed verification while
+the cause is fresh. Keep each entry short enough to read at session start.
+A lesson that recurs can become a binding rule after owner review. Put
+reusable coordination rules in AGENTS.md and project-specific rules in
+AGENTS-PROJECT.md; retain the lesson as history.
 
-## Format
+## Ledger
 
-One entry per lesson, newest first:
+No lessons recorded yet. Add newest entries first:
 
-- **YYYY-MM-DD — <pattern in five words or fewer>.** Rule: <one sentence,
-  written as an instruction to the next agent>. (source: <task ID, audit, or
-  owner correction>)
-
-## Reviewing
-
-- **Read this file at session start** alongside `TASKS.md` — one screen, not
-  the archive.
-- A lesson that recurs or proves expensive graduates into a numbered rule in
-  [`AGENTS.md`](../AGENTS.md); the architect decides graduation. This file
-  is the nursery, not the graveyard — a lesson still here after three hits is
-  a rule waiting to happen.
-- Do not delete lessons; superseded ones get struck through with the
-  replacing rule named, so the history of a mistake stays readable.
+```markdown
+- **YYYY-MM-DD - <pattern>.** Prevention: <one actionable rule>.
+  Source: <task, review, or owner correction>.
+```

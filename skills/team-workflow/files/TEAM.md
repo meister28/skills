@@ -1,79 +1,42 @@
-# ${PROJECT_NAME} — shared working agreement
+# Shared working agreement
 
-Read this brief agreement and `${TEAM_TASKS_PATH}` when starting or continuing
-work. The owner uses one agent at a time and gives instructions directly.
-`${TEAM_TASKS_PATH}` contains only current work; completed records are in
-`${TEAM_HISTORY_PATH}` for on-demand lookup.
+Read [team/TASKS.md](./team/TASKS.md) for active work and
+[TEAM-PROJECT.md](./TEAM-PROJECT.md) for this project's role preferences.
 
-## Roles
+## Roles and approval
 
-- The owner decides priorities and approves work.
-- The default CTO/architect role analyzes the product, investigates difficult
-  problems, makes architectural recommendations, writes plans/specifications,
-  and may implement when the owner asks.
-- The default senior-engineer role implements approved work, verifies it, and
-  reports results. The owner may also ask this agent to analyze, plan, or make
-  a direct change.
-- The task backlog belongs to the project. Write tasks neutrally; do not frame
-  them as instructions from one AI agent to another.
+The owner chooses priorities and approves work. Contributors may analyze,
+specify, implement, verify, and review as assigned. Recommend an Architect
+for work requiring broad judgment and an Implementation engineer for
+well-specified work; the recommendation is advice, not approval or assignment.
 
-These are defaults, not restrictions. The owner's latest direct instruction
-determines the work.
+An agent-created task starts Suggested. An Approved task may be implemented.
+A direct owner request approves only its stated scope and takes priority
+over queue order. When asked to work from the queue, continue Current work
+or take the first suitable Approved task. Surface Suggested work for the
+owner to decide; do not silently implement it.
 
-## Approval rule
+## Working and handoff
 
-Every backlog item has an `Approval` field:
+At session start, inspect Git status and read the active queue,
+[AGENTS.md](./AGENTS.md), and [AGENTS-PROJECT.md](./AGENTS-PROJECT.md).
+Open the relevant spec and source files. Keep Current work and its next step
+accurate enough for another contributor to resume. The owner should not
+have to relay technical handoffs between agents.
 
-- `Suggested` — an idea or recommendation. It may be analyzed or discussed,
-  but it must not be implemented.
-- `Approved` — the owner confirmed it or directly requested it. It may be
-  implemented.
+When verification repeatedly fails on the same diagnosis, the fix becomes
+fragile, or the work grows beyond its approved scope, stop and reassess.
+Record the evidence and the revised next step. Before reporting completion,
+ask whether the solution is clear and maintainable; surface a concern rather
+than silently adding an unapproved improvement.
 
-A task written by an agent starts as `Suggested`. A direct user request is
-approval for that exact scope, even if the task was not already in the
-backlog. Add or update the entry so the next agent can see it. Do not expand
-approval beyond the user's request.
+Record corrections in [team/LESSONS.md](./team/LESSONS.md) while the cause is
+fresh. Promote a recurring lesson to a shared rule only if it is genuinely
+reusable; project-specific rules belong in AGENTS-PROJECT.md.
 
-## Worker recommendation
+## Completion
 
-Every task has a `Recommended worker` field with a short reason:
-
-- `CTO / Software Architect` — use for complex analysis, architecture, product
-  or UX decisions, difficult debugging, high-risk changes, and work where
-  deep architectural judgment materially improves the result. **Prefer a
-  frontier model for this role** — the judgment calls are the reason the
-  role exists, and this is where the extra cost pays for itself.
-- `Implementor / Software Engineer` — use for routine, well-specified
-  implementation, straightforward fixes, tests, documentation
-  synchronization, and repetitive work. **A cost-efficient model is usually
-  the right choice here** — the task is well-specified and the spec, not
-  the model, carries the judgment.
-
-When discussing or proposing a new task, recommend one of these workers to the
-owner and record the same recommendation in TASKS. For work that should be
-designed by the CTO/architect and then implemented by the implementor, say so
-explicitly. The model preference travels with the role: architect tasks
-prefer a frontier model, implementor tasks suit a cost-efficient one. The
-recommendation is advice, not approval or assignment. The owner may give the
-work to either agent, and the owner's direct instruction always wins.
-
-## Working discipline
-
-**Stop and re-plan immediately when something goes sideways.** If
-verification fails twice on the same approach, the fix feels hacky, or the
-change is growing beyond its approved scope — STOP. Re-diagnose (or hand the
-evidence to the other role) before pushing on; grinding through a broken
-approach costs more than the re-plan. Record the pivot in the task's
-progress notes so the next agent doesn't repeat the dead end.
-
-**The implementor's elegance checkpoint:** before reporting done, ask
-"knowing everything I know now, is this the elegant solution?" If the fix
-feels hacky, pause and say so — propose the cleaner shape to the owner or
-architect instead of shipping a hack under a green test suite. Skip this for
-simple, obvious fixes; don't over-engineer. A recurring hackiness pattern
-also becomes a line in `team/LESSONS.md`.
-
-**Self-improvement loop:** after any correction from the owner, a review,
-or a failed verification, write the pattern and its one-line prevention rule
-into `team/LESSONS.md` in the same session, and read that file at session
-start. Lessons that recur graduate into numbered AGENTS.md rules.
+Run the relevant checks and update affected docs and CHANGELOG in the same
+commit. Move the finished record from TASKS to TASK-HISTORY with its result,
+verification, remaining uncertainty, and who completed it and when. Leave
+unfinished work in TASKS with an honest next step.
