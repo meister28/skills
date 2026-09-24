@@ -34,7 +34,9 @@ the chosen workflow root.
    preferences, and approved extra rules. Leave unknowns explicit.
 4. Enter owner-approved work in `team/TASKS.md`. Agent proposals start
    Suggested; a direct owner request approves only its stated scope.
-5. Check that every local link resolves and that the chosen commands work.
+5. Run the [workflow validator](./scripts/validate_workflow.py) when Python
+   is available; resolve its errors and review its warnings. Run the
+   project's chosen verification commands separately.
    Report what was created, what remains unconfigured, and any existing
    convention that the workflow must respect.
 
@@ -46,8 +48,21 @@ rules where useful; move project-specific commands, paths, invariants, and
 dated decisions to the extension files without losing them. A direct owner
 request to adopt or revise the workflow authorizes that scope. Ask for a
 decision only when competing existing policies cannot be reconciled from
-the request and repository evidence. Verify links and task records after
-the change.
+the request and repository evidence. Run the workflow validator after the
+change when Python is available; review its warnings before reporting.
+
+## Validate an adoption
+
+Run `python <skill>/scripts/validate_workflow.py <workflow-root>` from any
+directory. If `TEAM.md` lives elsewhere, pass `--agreement-root <directory>`.
+The validator uses only the Python standard library and changes no files.
+It checks required workflow files, local Markdown links, task fields and
+statuses, duplicate IDs, spec paths, and common signs that stack commands,
+source paths, or dated rules entered shared AGENTS/TEAM files. Missing
+fields in older completed records are warnings by default; use
+`--strict-history` after those records have been brought up to the current
+schema. Errors produce a nonzero exit code. Boundary warnings are clues for
+human review, not proof that every project-specific policy was found.
 
 ## Template map
 
@@ -61,6 +76,8 @@ the change.
   `files/team-reviews-README.md`: folder contracts.
 - `files/CONTEXT.md` and `files/CHANGELOG.md`: project glossary
   and change record stubs.
+- `scripts/validate_workflow.py`: read-only adoption check; its behavior
+  tests are in `tests/`.
 
 Do not add a universal persistence module, fixture clock, browser gate,
 UI policy, test command, or rule date. If a project needs one, record it in

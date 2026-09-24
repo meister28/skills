@@ -162,6 +162,18 @@ Inside your project, invoke the skill (for example `/team-workflow`).
 
 From then on, work the way the files prescribe: get tasks approved before they are built, and let finished work flow into `team/TASK-HISTORY.md`.
 
+### Check an adoption
+
+The read-only validator catches broken workflow links, missing task fields, duplicate IDs, mismatched approval/status, and common signs that project rules entered shared files. It uses Python 3.8+ with no third-party packages and does not run the project's build or tests.
+
+From this repository's root:
+
+```bash
+python skills/team-workflow/scripts/validate_workflow.py /path/to/project
+```
+
+If `TEAM.md` is above the app's workflow folder, add `--agreement-root /path/to/repository`. Errors return a nonzero exit code. Older completed records can remain in their historical format: missing fields there are warnings unless you pass `--strict-history`. Boundary warnings invite a human check; a text scan cannot prove that every project-specific rule has been separated.
+
 ---
 
 ## License
