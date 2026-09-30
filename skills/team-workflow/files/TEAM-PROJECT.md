@@ -16,3 +16,10 @@ The shared workflow is at this file's directory. No exceptions recorded.
 No project-specific operating decisions recorded yet. Date decisions when
 they are made so later contributors can distinguish history from current
 policy.
+
+## Adopted workflow source
+
+When this project uses a copied skill, record its canonical repository/path
+and the last adopted commit or version here. Distinguish that known baseline
+from the current installed files; report installation drift only after comparing
+them, or mark it unverified. No copied-skill baseline recorded yet.

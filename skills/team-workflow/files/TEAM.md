@@ -29,6 +29,11 @@ Every backlog item has an `Approval` field:
 - `Approved` — the owner confirmed it or directly requested it. It may be
   implemented.
 
+For new or updated cards, start Approval with `Suggested` or `Approved`,
+then name the source and scope. Ready and Current work require approval;
+Suggested belongs in Suggested or Deferred. Older approval wording need
+not be rewritten merely to adopt this convention.
+
 A task written by an agent starts as `Suggested`. A direct user request is
 approval for that exact scope, even if the task was not already in the
 backlog. Add or update the entry so the next agent can see it. Do not expand
@@ -61,8 +66,12 @@ work to either agent, and the owner's direct instruction always wins.
 
 1. Follow the owner's latest direct instruction within its scope, even if it
    is not yet in the queue. Record non-trivial work there for the next agent.
-2. When asked to work from the queue, continue Current work if present;
-   otherwise take the first suitable Approved item in recommended order.
+2. When asked to work from the queue, continue your assigned Current work
+   only if its approval, prerequisites and scope allow the next action.
+   Preserve another worker's ownership. Otherwise take the first eligible
+   Approved item suited to your established role in recommended order;
+   skip held dependencies and record why. The model alone does not establish
+   a role. If no role is established and routing changes the choice, clarify it.
 3. When asked to review the backlog, present Approved and Suggested items
    with their worker recommendations. An agent proposal remains Suggested
    until the owner approves it.
@@ -73,9 +82,12 @@ Inspect Git status at session start. Read this agreement, the active queue,
 [AGENTS.md](./AGENTS.md), [AGENTS-PROJECT.md](./AGENTS-PROJECT.md), and
 [team/LESSONS.md](./team/LESSONS.md); then open only the relevant spec and
 source files. Use older changelog and task-history entries when investigating
-a related decision. Keep Current work's progress, base commit, and exact next
-step accurate enough for another contributor to resume. The owner should not
-have to relay technical handoffs between agents.
+a related decision. Implementor names the actual worker and role, distinct
+from Recommended worker. Keep Current work's base commit, progress and next
+action in Status or its linked evidence. For blocked or review-ready work,
+name the responsible role, prerequisite (or none), exact next action and
+evidence link. A held task leaves independent approved work available. The
+owner should not have to relay technical handoffs between agents.
 
 ## Working discipline
 
@@ -86,6 +98,8 @@ evidence to the other role) before pushing on; grinding through a broken
 approach costs more than the re-plan. "Same approach" means the same
 diagnosis, not merely the same test name. Record the pivot and evidence in
 the task's progress notes so the next agent does not repeat a dead end.
+An intentional failing test before its fix is normal test-first development,
+not a failed attempt at the same diagnosis.
 
 **The implementor's elegance checkpoint:** before reporting done, ask
 "knowing everything I know now, is this the elegant solution?" If the fix
@@ -106,10 +120,18 @@ AGENTS-PROJECT.md. The lesson remains as history.
 ## Before finishing
 
 1. Run the checks specified for the changed surface in AGENTS-PROJECT.md.
-   Record the actual commands and results; disclose what remains unverified.
+   Record PASS / FAIL / NOT RUN, tested source, command and working directory,
+   with linked evidence and material limits. Record runtime/fixture details
+   where they affect interpretation; trivial doc edits need only relevant checks.
 2. Update affected specs and add a user- or maintainer-facing CHANGELOG entry
    in the same commit.
-3. Move a completed task to team/TASK-HISTORY.md with its result, evidence,
+3. Archive only when Acceptance is met: approval, implementation and accepted
+   behavior are distinct. A required NOT RUN or failed gate keeps that task
+   open with its next action; other approved work can continue. Evidence from
+   one source or harness accepts only the boundary it exercised. Preserve old
+   acceptance as dated history; if disproved, reopen the affected work under
+   a new unique task ID linked to the correction and original record.
+   Move a completed task to team/TASK-HISTORY.md with its result, evidence,
    changed paths, remaining uncertainty, Completed by, and Completed at.
    Leave unfinished work in TASKS.md with an honest next step.
 4. Commit only your work and restore any local state changed for testing.

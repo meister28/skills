@@ -14,10 +14,14 @@ with a reason, **Type**, **Summary**, **Implementor**, **Created**,
 definitions in TASK-HISTORY.md; a project-specific type must be defined in
 AGENTS-PROJECT.md. The recommendation helps route work but does not approve
 or assign it. Implementor says who is actually doing the task, or
-`Unassigned` until someone takes it.
+`Unassigned` until someone takes it; Current work names the actual worker
+and role. Approval starts `Approved` or `Suggested`, followed by its source
+and scope, as defined in TEAM.md.
 
 - **Current work:** an active owner with a base commit, progress, and the
-  next concrete step another agent could take.
+  next concrete step another agent could take. Use Status and linked evidence
+  for these details. Blocked/review-ready notes name the responsible role,
+  prerequisite, next action and evidence; preserve the `Current` prefix.
 - **Ready:** owner-approved tasks, in the order they should be attempted.
 - **Suggested:** agent proposals and review candidates awaiting approval.
 - **Deferred:** work parked behind a decision or prerequisite; Status names
@@ -50,19 +54,21 @@ Copy this block into the right section and fill every required field. When
 the task finishes, move it to TASK-HISTORY.md, replace Status with
 Completed by / Completed at, and add verification and the detail block for
 its Type. Keep the final record truthful even if the recommendation and
-actual implementor differ.
+actual implementor differ. Archive only after Acceptance is met. Required
+checks marked FAIL or NOT RUN leave the task open; an implemented result
+can be recorded without calling it accepted.
 
 ```markdown
 ### <ID> — <title: the outcome when done>
 
 **Trigger:** <request, defect, or linked review finding>
-**Approval:** <owner request/approval with date, or Suggested with source>
+**Approval:** <Approved — owner request/approval with date and scope, or Suggested — source>
 **Recommended worker:** <role and one-line reason>
 **Type:** <bug fix | feature | refactor | instrument | playtest | audit | design | architecture review | plan | consultation | docs | infrastructure>
 **Summary:** <one or two sentences: what and why>
 **Implementor:** <actual worker or Unassigned>
 **Created:** <YYYY-MM-DD>
-**Status:** <Current / Ready / Suggested / Deferred, plus next step or blocker>
+**Status:** <section prefix; base/progress for Current; responsible role, prerequisite, next action and evidence for blocked/review-ready work>
 **Acceptance:** <observable behavior, evidence, and records needed for done>
 **Spec:** <relative path when a spec exists>
 ```

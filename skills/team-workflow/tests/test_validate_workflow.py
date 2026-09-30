@@ -111,6 +111,50 @@ class ValidatorTests(unittest.TestCase):
         queue.write_text(queue.read_text(encoding="utf-8").replace("No approved queued task.", task_card() + task_card()), encoding="utf-8")
         self.assertTrue(any("duplicate task ID P-001" in item.message for item in self.messages()))
 
+    def test_duplicate_id_across_queue_and_history_is_always_an_error(self):
+        queue = self.root / "team/TASKS.md"
+        history = self.root / "team/TASK-HISTORY.md"
+        queue.write_text(queue.read_text(encoding="utf-8").replace("No approved queued task.", task_card()), encoding="utf-8")
+        history.write_text(history.read_text(encoding="utf-8").replace("No completed tasks yet.", task_card()), encoding="utf-8")
+        for strict in (False, True):
+            self.assertTrue(any(item.severity == "error" and "duplicate task ID P-001" in item.message for item in self.messages(strict)))
+
+    def test_suggested_authority_cannot_enter_ready_or_current_work(self):
+        queue = self.root / "team/TASKS.md"
+        original = queue.read_text(encoding="utf-8")
+        for section, placeholder, status in (
+            ("Ready", "No approved queued task.", "Ready"),
+            ("Current work", "No current task.", "Current"),
+        ):
+            with self.subTest(section=section):
+                card = task_card().replace("Owner approved on 2026-09-24.", "Suggested — review candidate.").replace("**Status:** Ready", "**Status:** " + status)
+                queue.write_text(original.replace(placeholder, card), encoding="utf-8")
+                self.assertTrue(any(item.severity == "error" and "Suggested approval" in item.message for item in self.messages()))
+
+    def test_current_work_requires_an_assigned_implementor(self):
+        queue = self.root / "team/TASKS.md"
+        queue.write_text(queue.read_text(encoding="utf-8").replace("No current task.", task_card().replace("**Status:** Ready", "**Status:** Current")), encoding="utf-8")
+        self.assertTrue(any("Current work requires an assigned Implementor" in item.message for item in self.messages()))
+
+    def test_assigned_current_with_missing_acceptance_gate_is_valid(self):
+        queue = self.root / "team/TASKS.md"
+        card = task_card().replace("**Implementor:** Unassigned", "**Implementor:** Codex / Architect").replace(
+            "**Status:** Ready — implementation next.",
+            "**Status:** Current — base abc123; implemented; auth gate NOT RUN; prerequisite: credentials; next: owner supplies private session, architect runs wrapper check; evidence: service checks PASS."
+        )
+        queue.write_text(queue.read_text(encoding="utf-8").replace("No current task.", card), encoding="utf-8")
+        self.assertFalse([item for item in self.messages() if item.severity == "error"])
+
+    def test_crlf_validation_is_read_only_and_matches_lf(self):
+        queue = self.root / "team/TASKS.md"
+        queue.write_text(queue.read_text(encoding="utf-8").replace("No approved queued task.", task_card()), encoding="utf-8")
+        lf_issues = self.messages()
+        for path in self.root.rglob("*.md"):
+            path.write_bytes(path.read_text(encoding="utf-8").replace("\n", "\r\n").encode("utf-8"))
+        before = {path: path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
+        self.assertEqual(lf_issues, self.messages())
+        self.assertEqual(before, {path: path.read_bytes() for path in self.root.rglob("*") if path.is_file()})
+
     def test_shared_policy_leak_is_flagged_without_flagging_project_extension(self):
         shared = self.root / "AGENTS.md"
         shared.write_text(shared.read_text(encoding="utf-8") + "\n## 7. Storage rule (2026-09-24)\nRun `npm test` after changing `src/lib/store.ts`.\n", encoding="utf-8")

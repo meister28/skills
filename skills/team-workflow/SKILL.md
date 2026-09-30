@@ -51,6 +51,13 @@ decision only when competing existing policies cannot be reconciled from
 the request and repository evidence. Run the workflow validator after the
 change when Python is available; review its warnings before reporting.
 
+For copied-skill adoptions, record canonical repository/path and adopted
+commit or version in TEAM-PROJECT.md. Capture local improvements in the
+project's existing lesson/export process. Hub release and project adoption
+are separately scoped actions: publication does not prove installed files
+updated. Compare actual files when installation verification is requested;
+otherwise report that boundary as unverified.
+
 ## Validate an adoption
 
 Run `python <skill>/scripts/validate_workflow.py <workflow-root>` from any
@@ -63,6 +70,9 @@ fields in older completed records are warnings by default; use
 `--strict-history` after those records have been brought up to the current
 schema. Errors produce a nonzero exit code. Boundary warnings are clues for
 human review, not proof that every project-specific policy was found.
+It rejects Suggested approval in Ready/Current and unassigned Current work.
+It cannot establish actual owner authority, dependency satisfaction or
+semantic acceptance; those require the task's evidence and human judgment.
 
 ## Template map
 

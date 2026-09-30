@@ -12,7 +12,7 @@ Agent Skills for AI coding agents. Each skill lives in `skills/<skill-name>/` wi
 
 **One command sets up a working agreement that any AI agent — Claude Code, Codex, Cursor, or whatever ships next month — reads before it touches code.**
 
-**Save tokens and still get top-tier code and architecture: the expensive model only works where it matters.**
+**Reserve the expensive model for architecture and difficult decisions; use a cheaper model for well-specified work.**
 
 **Your AI agents work like a real engineering team, coordinating with each other.**
 
@@ -27,7 +27,7 @@ Chat history is the wrong place for project memory. `team-workflow` moves it int
 ### How the workflow runs
 
 ```
-Suggested ──▶ Approved ──▶ Built ──▶ Reviewed ──▶ team/TASK-HISTORY.md
+Suggested ──▶ Approved ──▶ Built ──▶ Accepted ──▶ team/TASK-HISTORY.md
     ▲                                    │
     └── review candidates become ────────┘
         new queue entries
@@ -35,9 +35,9 @@ Suggested ──▶ Approved ──▶ Built ──▶ Reviewed ──▶ team/T
 
 1. **Plan.** A frontier agent (in the *CTO / Software Architect* role) writes an implementation-ready spec in `team/specs/` and adds a task to `team/TASKS.md` with acceptance criteria and a recommended worker. The task starts as `Suggested`.
 2. **Approve.** You review and mark it `Approved`. `Suggested` items may not be implemented; `Approved` ones may.
-3. **Build.** An agent in the *Implementor / Software Engineer* role picks up the task in a fresh session. It needs no briefing: the task, the spec, and the project rules are all in the repo. The spec and changelog are updated in the same commit as the code. When verification fails twice on the same approach, the agent stops and re-plans instead of grinding on; before reporting done it asks "knowing everything I know now, is this the elegant solution?" — and flags hacks instead of shipping them under a green test suite.
+3. **Build.** An agent continues its own eligible task or takes the first approved task suited to its established role with prerequisites satisfied. Another worker's task keeps its owner; a blocked task leaves independent approved work available. The task, spec and project rules supply the briefing. Code, spec and changelog stay together. Repeated failures from the same diagnosis prompt a re-plan; an intentional failing test before its fix is normal development.
 4. **Review.** Audits and architecture reviews are written to `team/audit/` and `team/reviews/`. Anything worth acting on becomes a new `Suggested` queue entry instead of disappearing when the session ends. Corrections — from you, a review, or a failed verification — become one-line prevention rules in `team/LESSONS.md` that every agent reads at session start.
-5. **Record.** Finished work moves to `team/TASK-HISTORY.md` with who did it, when, and the evidence. After owner review, recurring lessons become binding rules in the shared agreement or project extension, according to their scope.
+5. **Record.** Work moves to `team/TASK-HISTORY.md` when its acceptance criteria are met, with who did it, when, and source-specific evidence. Implemented work with a required check still NOT RUN stays open with the responsible role and next action. After owner review, recurring lessons become binding rules in the shared agreement or project extension, according to their scope.
 
 Any agent, at any point, can read the queue and know what is sanctioned, what is done, and why — and the team stops paying for the same mistake twice.
 
@@ -60,7 +60,7 @@ Any agent, at any point, can read the queue and know what is sanctioned, what is
 **Spec:** team/specs/P-007-CSV-EXPORT-SPEC.md
 ```
 
-**2. You approve** — the approval and status fields record your decision, and the task becomes buildable. The implementor picks it up in a fresh session with no briefing beyond "work the queue."
+**2. You approve** — Approval starts `Approved`, naming your decision and scope. The task becomes eligible once its prerequisites are met. When an implementor takes it, Implementor names the actual worker and role; Status records the base commit, progress and next action. A worker recommendation is advice, not assignment.
 
 **3. The implementor ships** — code, spec, and changelog in one commit, each task provable:
 
@@ -77,7 +77,7 @@ Any agent, at any point, can read the queue and know what is sanctioned, what is
 ### P-007 — CSV export for the orders table
 
 **Trigger:** Architect proposal — users need a filtered export.
-**Approval:** Owner approved the spec on YYYY-MM-DD.
+**Approval:** Approved — owner approved the spec on YYYY-MM-DD.
 **Recommended worker:** Implementor / Software Engineer — the spec carries the decisions.
 **Type:** feature
 **Summary:** Filtered CSV export shipped as specified.
@@ -102,6 +102,9 @@ Nothing above lives in a chat. If the next agent asks "is CSV export done?", "wh
 | Without a shared workflow | With `team-workflow` |
 |---|---|
 | Switching agents means re-explaining the project | The new agent reads the repo and continues |
+| "Continue" picks up someone else's task or a blocked dependency | Agents preserve ownership and choose eligible approved work |
+| A handoff says only "blocked" | It names who acts next, the prerequisite, exact action and evidence |
+| Code is written, so the task is marked done | Required acceptance checks must pass; missing checks stay visible |
 | "Is this approved?" is answered from memory of a chat | Approval state is recorded per task (`Suggested` / `Approved`) |
 | Whichever model is open does whatever is asked | Each task names its worker: frontier for architecture and hard debugging, cost-efficient for well-specified builds, tests, and docs |
 | Intent is pasted between chats | Specs in `team/specs/` are the hand-off between agents |
@@ -114,7 +117,7 @@ Nothing above lives in a chat. If the next agent asks "is CSV export done?", "wh
 ### What you get
 
 - **Continuity across agents and sessions.** The task queue, specs, and history persist in the repo. No agent depends on what another agent remembers.
-- **Lower cost per feature.** Most coding tasks don't need the most expensive model. Because every task names its recommended worker, routing work to the right tier is the default rather than an afterthought.
+- **Deliberate model spending.** Every task recommends a worker and explains why, helping reserve frontier models for difficult decisions. Actual savings depend on the project and have not been measured for this update.
 - **Control without overhead.** Nothing gets built unless it is approved. Product-specific rules, including any visual design approval policy, live in that project's extension. You decide what gets built, and agents handle the rest.
 - **Documentation that stays true.** The binding rules require spec and changelog updates in the same commit as the behavior change. Six months later the docs still match the code, and the next agent's first five minutes are cheap.
 - **A workflow that improves over time.** Reusable coordination improvements can be brought back to this skill. Project-specific decisions stay in the project's extension files, so future projects receive a clean template.
@@ -153,6 +156,12 @@ To pick up updates automatically, symlink instead:
 ln -s /path/to/skills/skills/team-workflow ~/.claude/skills/team-workflow
 ```
 
+A symlink follows changes in that checkout; update the checkout deliberately.
+Copied installations need a separate update and file comparison. Neither method
+automatically upgrades workflow files already adopted by a project. Record the
+canonical skill source and last adopted commit/version in `TEAM-PROJECT.md`,
+then merge a chosen update while preserving project policies.
+
 ### Use
 
 Inside your project, invoke the skill (for example `/team-workflow`).
@@ -164,7 +173,7 @@ From then on, work the way the files prescribe: get tasks approved before they a
 
 ### Check an adoption
 
-The read-only validator catches broken workflow links, missing task fields, duplicate IDs, mismatched approval/status, and common signs that project rules entered shared files. It uses Python 3.8+ with no third-party packages and does not run the project's build or tests.
+The read-only validator catches broken workflow links, missing task fields, duplicate IDs and section/status mismatches. It rejects Suggested approval in Ready/Current, Approved cards left in Suggested, and unassigned Current work. It also flags common signs that project rules entered shared files. It uses Python 3.8+ with no third-party packages and does not run the project's build or tests.
 
 From this repository's root:
 
@@ -173,6 +182,10 @@ python skills/team-workflow/scripts/validate_workflow.py /path/to/project
 ```
 
 If `TEAM.md` is above the app's workflow folder, add `--agreement-root /path/to/repository`. Errors return a nonzero exit code. Older completed records can remain in their historical format: missing fields there are warnings unless you pass `--strict-history`. Boundary warnings invite a human check; a text scan cannot prove that every project-specific rule has been separated.
+
+The validator checks record structure. It cannot establish that the owner
+actually approved a task, a prerequisite is satisfied, or the product passed
+acceptance. Those decisions need the task's source-specific evidence.
 
 ---
 

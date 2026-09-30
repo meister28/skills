@@ -252,6 +252,11 @@ def check_records(root: Path, issues: List[Issue], strict_history: bool) -> None
                     issues.append(Issue("error", relative, record.line, record.task_id + " status disagrees with " + expected + " section"))
                 if expected == "suggested" and record.fields.get("approval", "").lower().startswith("approved"):
                     issues.append(Issue("error", relative, record.line, record.task_id + " is approved but remains Suggested"))
+                approval = record.fields.get("approval", "").lower()
+                if expected in ("ready", "current work") and approval.startswith("suggested"):
+                    issues.append(Issue("error", relative, record.line, record.task_id + " has Suggested approval in " + expected + " section"))
+                if expected == "current work" and record.fields.get("implementor", "").lower() == "unassigned":
+                    issues.append(Issue("error", relative, record.line, record.task_id + " Current work requires an assigned Implementor"))
             if missing:
                 issues.append(Issue(severity, relative, record.line, record.task_id + " missing " + ", ".join(missing)))
 

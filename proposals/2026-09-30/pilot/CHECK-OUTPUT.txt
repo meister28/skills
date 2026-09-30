@@ -1,0 +1,23 @@
+PASS limited scalar frontmatter: team-workflow
+PASS limited scalar frontmatter: web-app-engineering
+PASS local package/document links: 13
+PASS fresh strict adoption, read-only; warnings: ['verification commands remain unconfigured']
+Candidate SHA-256 (UTF-8 with normalized LF):
+8d6ac69954a7d1ee0ffe4896bed649bb0eb60d4a452b2d644b8d281c9d61fc3f skills/team-workflow/SKILL.md
+0ccdf46f906dd8a2328619507855de08519eeb0fb8d4f18379ca5a7a13408847 skills/team-workflow/files/AGENTS-PROJECT.md
+7dbcba07ebf233266491af78adfdad58bc20a3c846375dd29e36b471b8e4c6b5 skills/team-workflow/files/AGENTS.md
+a640ecd78d08cd23f10c5745750ab5061d1b39361c367c1af470a0b6aab98f55 skills/team-workflow/files/CHANGELOG.md
+db6a9862d6f6f4290d8fe25f7339473f7eae22359baaa30de55131733026b494 skills/team-workflow/files/CONTEXT.md
+0f59a86c2c506235fd9c7717b8341fbc3a292eb351a619d7e324594dca720c44 skills/team-workflow/files/team-audit-README.md
+291306082ad43cc2f5c3bb1f582694c9d59318dff69fcace7f6178f0c9badfd6 skills/team-workflow/files/team-LESSONS.md
+211cf2391e2cf26e12e91443e5b1f3fd574b47601f4ce1ef550bf457428f588a skills/team-workflow/files/TEAM-PROJECT.md
+d83472fc012353e1fbeaf7252831fb1050a17bb8d0e46229d29b0ece4d452657 skills/team-workflow/files/team-reviews-README.md
+bf2d98568bd9a912d5337424605988fe76cc574e26a90e730007ed03ae3b00b8 skills/team-workflow/files/team-specs-README.md
+e9b7e168b5be79a76135de417c803be06630be21bbd4570fcfd701d41e8f68cd skills/team-workflow/files/team-TASK-HISTORY.md
+dc0f80b23a61a0a9f2d674fb25538affb02c19d28284749b385eb4081caceeca skills/team-workflow/files/team-TASKS.md
+467d36c4351f306b50a2da5e5f4684a4e3f82cc4d06fee2d55e91f03700b2c44 skills/team-workflow/files/TEAM.md
+82aba035d5b92c063f38f87bb900a136dcb87118d6089a1169a4f0431fb47e72 proposals/2026-09-30/pilot/web-app-engineering/SKILL.md
+8a06d748ee51b92702e430f937b319b7fb95b10996bd7506223e1064668a5ad1 proposals/2026-09-30/pilot/web-app-engineering/references/browser-interactions.md
+d7e87e73b5ed9c71f85c94bcd32c68e7dc591f9e3a50a9f256148e1183458749 proposals/2026-09-30/pilot/web-app-engineering/references/cloud-boundaries.md
+af40fb33372ca8489f6ee0371747af4785efa6320d3a05fd3c3698da00e6bfc5 proposals/2026-09-30/pilot/web-app-engineering/references/state-and-data.md
+9de22e1e2523f089c7fcd75d399019f82ffd0743318015516fba967c0ac80c52 proposals/2026-09-30/pilot/web-app-engineering/references/verification.md

@@ -11,9 +11,9 @@ analyzes and recommends; the senior engineer implements and verifies) and the
 approval rule: **a backlog item marked `Suggested` must not be implemented**,
 while `Approved` may be — and a direct owner request approves exactly its own
 scope, nothing wider.
-[team/TASKS.md](./team/TASKS.md) is the short active backlog and handoff: take the first
-`Approved` item recommended for your role (or the owner's direct
-instruction), record `Current work`, and keep its next step accurate. When
+[team/TASKS.md](./team/TASKS.md) is the short active backlog and handoff: follow
+TEAM.md's choosing-work rules for ownership, approval and prerequisites,
+record `Current work`, and keep its next step accurate. When
 done, move the full record to [team/TASK-HISTORY.md](./team/TASK-HISTORY.md) with `Completed by` /
 `Completed at`. Read the archive only to investigate a past task. The owner
 does not relay technical handoffs — the files do.
@@ -81,6 +81,8 @@ Before reporting a change as done, run the checks listed in
 [AGENTS-PROJECT.md](./AGENTS-PROJECT.md) and state the commands and results.
 For behavior-bearing changes, exercise the real product surface when unit
 tests alone cannot prove the change. Record any unverified behavior honestly.
+Use TEAM.md's acceptance and evidence rules before archiving; passing a
+different source or harness does not satisfy the task's missing gate.
 
 ## 4. Leave the tree as you found it
 
