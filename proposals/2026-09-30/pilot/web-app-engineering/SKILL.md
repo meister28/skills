@@ -22,7 +22,7 @@ Read only the applicable references:
 - Drag/drop, swipe, sortable layouts, animation or UI timing: [browser interactions](references/browser-interactions.md).
 - Reducers, dates, undo, local persistence, import/export or domain validation: [state and data](references/state-and-data.md).
 - Server commands, optimistic reconciliation, identity/database boundaries or moving a prototype to a backend: [cloud boundaries](references/cloud-boundaries.md).
-- Selecting checks, interpreting flakes, acceptance reviews, build/runtime proof or performance claims: [verification](references/verification.md).
+- Selecting checks, time-sensitive test fixtures, interpreting flakes, acceptance reviews, build/runtime proof or performance claims: [verification](references/verification.md).
 
 For a review, trace the relevant journey across its real boundaries and report concrete gaps with evidence; implementation remains within the owner's requested scope. For a refactor, write the behavior invariants before moving ownership and use separable steps so a regression can be located. For a fix, reproduce the contract violation and verify the affected journey after the change.
 

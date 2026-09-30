@@ -21,6 +21,9 @@ Add newest entries first. Keep the pattern brief and the rule actionable:
   binding rule for owner review. Put reusable coordination rules in
   [`AGENTS.md`](../AGENTS.md), and project-specific ones in
   [`AGENTS-PROJECT.md`](../AGENTS-PROJECT.md).
+- Capture portable improvements as proposals for the canonical skills
+  repository. Adopting a project rule does not authorize changing the shared
+  skill or global installation; those changes need their own approved scope.
 - Keep lessons as history. If a rule supersedes a lesson, strike through the
   old text and name the replacing rule instead of silently deleting it.
 

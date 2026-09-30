@@ -78,6 +78,11 @@ are separately scoped actions: publication does not prove installed files
 updated. Compare actual files when installation verification is requested;
 otherwise report that boundary as unverified.
 
+Capture reusable improvements as proposals for review in the canonical skills
+repository, with their source and rationale. A consumer project's lesson or
+workflow change does not authorize editing the shared skill or its global
+installation; make those edits only within an owner-authorized skill update.
+
 ## Validate an adoption
 
 Run `python <skill>/scripts/validate_workflow.py <workflow-root>` from any

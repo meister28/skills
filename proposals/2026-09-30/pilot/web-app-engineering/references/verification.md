@@ -20,6 +20,26 @@ not inherit all three merely because this reference describes them.
 
 Inspect repository scripts/configs to confirm commands actually cover the claimed surface. A solution-style TypeScript config may make a familiar invocation check no source files; use the project's verified build/typecheck command. A stale launcher should be repaired or correctly invoked before interpreting a test result.
 
+## Keep time-sensitive fixtures on one clock
+
+Use when behavior or test data depends on time. For a deterministic test,
+derive fixtures and expectations from the same controlled clock that the
+application code observes. A fixed fixture date is valid when that clock is
+also fixed; pairing it with a component that reads the live clock can make
+the test expire as the calendar advances.
+
+When a scenario intentionally uses live time, derive relative fixtures from
+the same observed reference time and account for the time zone and calendar
+boundaries relevant to the behavior. Inspect all clock readers, including
+browser/server boundaries where applicable. For a rollover test, advance the
+controlled clock explicitly rather than wait for the real calendar to change.
+Keep genuinely time-independent literals with a clear reason.
+
+Reuse the project's fixture helpers and exemptions. A repeated date-rot
+failure can justify a targeted guard; demonstrate its rejected and permitted
+cases before relying on it. This guidance does not require a fixed date,
+particular toolchain, new guard, or clock policy for unrelated tests.
+
 ## Trust the instrument only after its failure path is credible
 
 Filters selecting zero cases, unknown flags, zero executed cases or malformed verdicts must not produce PASS. Demonstrate a representative failure and a genuine success for a new fragile gate. Machine verdicts should have one unambiguous channel; diagnostics use a distinct prefix. Preserve the relation between selected, executed, failed and skipped cases.

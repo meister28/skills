@@ -3,6 +3,19 @@
 Repository changes. Publication and installed-copy adoption are separate
 actions.
 
+## 2026-10-01
+
+### Changed
+
+- `team-workflow` explicitly separates portable improvement proposals from
+  owner-authorized changes to the shared skill or global installation.
+- The existing `web-app-engineering` pilot explains how time-sensitive fixtures,
+  application clock readers and expectations share a clock, with deliberate
+  rollover checks. It remains a technical pilot; no clock policy was added to
+  the coordination workflow. Completed by Atlas
+  [Codex; model=GPT-6.1 Sol; thinking=Medium; id=A01] on 2026-10-01
+  (Asia/Riyadh); see [verification](proposals/2026-10-01/SKILL-UPDATE.md).
+
 ## 2026-09-30
 
 ### Changed
