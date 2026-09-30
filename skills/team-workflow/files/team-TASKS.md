@@ -15,7 +15,7 @@ definitions in TASK-HISTORY.md; a project-specific type must be defined in
 AGENTS-PROJECT.md. The recommendation helps route work but does not approve
 or assign it. Implementor says who is actually doing the task, or
 `Unassigned` until someone takes it; Current work names the actual worker
-and role. Approval starts `Approved` or `Suggested`, followed by its source
+and role, using TEAM.md's registered agent name. Approval starts `Approved` or `Suggested`, followed by its source
 and scope, as defined in TEAM.md.
 
 - **Current work:** an active owner with a base commit, progress, and the
@@ -66,7 +66,7 @@ can be recorded without calling it accepted.
 **Recommended worker:** <role and one-line reason>
 **Type:** <bug fix | feature | refactor | instrument | playtest | audit | design | architecture review | plan | consultation | docs | infrastructure>
 **Summary:** <one or two sentences: what and why>
-**Implementor:** <actual worker or Unassigned>
+**Implementor:** <registered agent name and role, human identity, or Unassigned>
 **Created:** <YYYY-MM-DD>
 **Status:** <section prefix; base/progress for Current; responsible role, prerequisite, next action and evidence for blocked/review-ready work>
 **Acceptance:** <observable behavior, evidence, and records needed for done>

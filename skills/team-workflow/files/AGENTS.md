@@ -58,8 +58,8 @@ Task attribution:
   same commit, including work completed as part of a larger task.
 - When a task reaches `Done` and moves to [team/TASK-HISTORY.md](./team/TASK-HISTORY.md), its final
   changelog entry names the task ID, who completed it, and the completion
-  date/time with timezone. Use a stable identity such as `Codex`,
-  `Claude Code`, `Owner`, or the name the owner supplied. The task entry
+  date/time with timezone. Agents use the registered name defined in TEAM.md;
+  people use their project identity. The task entry
   records the same identity and timestamp.
 - Every task also records a `Recommended worker` and a short reason,
   following TEAM.md. The recommendation routes deep architectural and

@@ -10,6 +10,23 @@ Use the files in `files/` to give contributors one durable place for decisions,
 approved work, and handoff. The shared files are stack-neutral. Project facts
 and additional policies belong in `AGENTS-PROJECT.md` and `TEAM-PROJECT.md`.
 
+## Select setup or update
+
+Use this same skill for both. Inspect the requested repository and its root
+instructions before choosing a mode; a missing version receipt is not evidence
+of a new project.
+
+- No workflow or equivalent process: follow New project.
+- Existing or partial workflow, older templates, or unknown adopted version:
+  follow [Update an existing workflow](./references/update.md).
+- Known target already adopted: validate and report no update needed, preserving
+  intentional project overrides. A request to check/review alone is read-only.
+
+`team-workflow update this project` authorizes a local upgrade to the available
+skill source. For `latest published`, resolve and pin the canonical upstream
+revision first; report an unavailable source rather than claiming latest.
+Updating this project's workflow does not imply updating a global skill install.
+
 ## Choose the workflow root
 
 Prefer the repository root so every contributor finds `AGENTS.md`. In a
@@ -32,6 +49,8 @@ the chosen workflow root.
 3. Fill only verified project facts in the extension files: existing doc
    locations, actual verification commands and working directory, role
    preferences, and approved extra rules. Leave unknowns explicit.
+   Register each participating agent using TEAM.md's name convention and
+   TEAM-PROJECT.md's registry; ask the owner for missing name/model/settings.
 4. Enter owner-approved work in `team/TASKS.md`. Agent proposals start
    Suggested; a direct owner request approves only its stated scope.
 5. Run the [workflow validator](./scripts/validate_workflow.py) when Python
@@ -50,6 +69,7 @@ request to adopt or revise the workflow authorizes that scope. Ask for a
 decision only when competing existing policies cannot be reconciled from
 the request and repository evidence. Run the workflow validator after the
 change when Python is available; review its warnings before reporting.
+Use the update reference for version comparison, merge and adoption receipt.
 
 For copied-skill adoptions, record canonical repository/path and adopted
 commit or version in TEAM-PROJECT.md. Capture local improvements in the

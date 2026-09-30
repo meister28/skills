@@ -20,6 +20,34 @@ The queue contains current work; completed records live in
 These are defaults, not restrictions. The owner's latest direct instruction
 determines the work.
 
+## Agent names
+
+Every agent, including a delegated worker, has a project-unique name:
+`<name> [<tool>; model=<model>; thinking=<level>; id=<ID>]`.
+For example, `Atlas [Codex; model=example-model; thinking=high; id=A01]`.
+Reuse its entry in TEAM-PROJECT.md when resuming the same agent instance;
+a different instance gets a different ID even with identical settings.
+
+Use a name already assigned to this instance and model/thinking values supplied
+by the active runtime or confirmed by the owner. A config default alone does
+not establish the current session. If the name, exact model or thinking level
+is missing, ask the owner for the missing values together; do not invent a name
+or infer settings. Keep the question pending rather than treating silence as
+confirmation. Record temporary values as `unknown — awaiting owner confirmation`
+and continue independent work. If the owner cannot establish a value, retain it
+as explicitly unverified; an explicitly unsupported thinking control is `n/a`.
+Record the value source in the registry and reuse confirmed values for the same
+instance, without repeating a pending question. A delegator may relay confirmed
+identity metadata and consolidate unresolved questions for multiple workers.
+When settings change, retain the ID and record a new dated label; earlier
+attribution stays as written. Names identify workers, not roles or approval.
+
+Use that label in Implementor, Completed by, final changelog attribution and
+authored handoffs/reviews; put the actual role beside it when routing matters.
+For shared work, name each contributor and what they did. Preserve older
+generic identities in history. Human names and configured Git authorship
+remain governed by the project's existing convention.
+
 ## Approval rule
 
 Every backlog item has an `Approval` field:

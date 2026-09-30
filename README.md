@@ -116,6 +116,12 @@ Nothing above lives in a chat. If the next agent asks "is CSV export done?", "wh
 
 ### What you get
 
+Each agent has a recognizable name that includes its tool, model, thinking
+level and a unique ID. The same name follows its task ownership, reviews and
+completion records. Two agents using the same model remain distinguishable;
+the agent asks you for any missing name, model or thinking level. Values stay
+pending confirmation rather than being guessed.
+
 - **Continuity across agents and sessions.** The task queue, specs, and history persist in the repo. No agent depends on what another agent remembers.
 - **Deliberate model spending.** Every task recommends a worker and explains why, helping reserve frontier models for difficult decisions. Actual savings depend on the project and have not been measured for this update.
 - **Control without overhead.** Nothing gets built unless it is approved. Product-specific rules, including any visual design approval policy, live in that project's extension. You decide what gets built, and agents handle the rest.
@@ -167,9 +173,32 @@ then merge a chosen update while preserving project policies.
 Inside your project, invoke the skill (for example `/team-workflow`).
 
 - **New project.** It detects the stack and existing conventions, scaffolds the shared files, and fills the two project extensions with verified commands and decisions. Any unknown remains explicit.
-- **Existing repo.** It compares against what is already there, preserves existing content, and separates shared coordination rules from project-specific policies before adapting the files.
+- **Existing workflow.** It selects the update path, compares the adopted source with the target where available, and merges improvements while preserving local policies, task ownership and history. Older combined files and workflows without a recorded version are handled as existing workflows.
+- **Already current.** It validates the adoption and reports no update needed. Checking a workflow alone does not authorize changing it.
 
 From then on, work the way the files prescribe: get tasks approved before they are built, and let finished work flow into `team/TASK-HISTORY.md`.
+
+### Update a project's workflow
+
+Use the same skill; a separate `team-workflow-update` installation is unnecessary.
+For example, ask your agent:
+
+```text
+Use team-workflow to update this project's existing workflow.
+```
+
+That uses the available skill source. To request the latest published version:
+
+```text
+Use team-workflow to update this project to the latest published workflow.
+Preserve its project policies, active tasks and history.
+```
+
+The agent resolves a specific upstream revision, merges the changes, runs the
+validator and records the adopted baseline in `TEAM-PROJECT.md`. It asks only
+when a genuine policy conflict needs your decision. An unfinished upgrade
+keeps the previous adopted baseline. Repeating a completed update validates
+without adding duplicate rules or change records.
 
 ### Check an adoption
 

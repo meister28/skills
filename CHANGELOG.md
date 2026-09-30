@@ -7,6 +7,15 @@ actions.
 
 ### Changed
 
+- Agents have distinct names containing tool, model, thinking level and an
+  instance ID, carried through ownership, handoffs and completion records.
+  Unavailable settings remain explicit; historical attribution is preserved.
+- Agents ask the owner for missing name, exact model or thinking settings,
+  keeping unanswered values pending and reusing confirmed session identities.
+- The same team-workflow skill detects setup, existing-workflow upgrade or
+  already-current validation. Upgrades preserve local policy and live records,
+  compare adopted sources where available, and record a verified adoption receipt.
+
 - README explains ownership, dependencies, acceptance and deliberate copied-skill
   updates; it distinguishes structural validation from product proof.
 

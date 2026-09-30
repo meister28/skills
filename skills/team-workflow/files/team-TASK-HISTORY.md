@@ -21,7 +21,8 @@ open Status with completion fields. Every new completed record has:
   the recommendation.
 - **Created** — when the task entered the queue.
 - **Acceptance** — the original done conditions and whether each was met.
-- **Completed by** and **Completed at** — the contributor and a dated time
+- **Completed by** and **Completed at** — the registered agent name or human
+  identity and a dated time
   with timezone when available.
 - **Verification** — commands, real-surface checks, or other evidence with
   results, plus what was not exercised.
